@@ -1,0 +1,28 @@
+<h2>Créer un compte</h2>
+
+<form (submit)="onRegister()">
+  <div>
+    <label for="pseudo">Pseudo :</label><br />
+    <input type="text" id="pseudo" [(ngModel)]="user.pseudo" name="pseudo" required/>
+  </div>
+
+  <br/>
+
+  <div>
+    <label for="email">Email :</label><br />
+    <input type="email" id="email" [(ngModel)]="user.email" name="email" required/>
+  </div>
+
+  <br/>
+
+  <div>
+    <label for="password">Mot de passe :</label><br />
+    <input type="password" id="password" [(ngModel)]="user.password" name="password" required/>
+  </div>
+
+  <br/>
+
+  <button type="submit">S'inscrire</button>
+</form>
+
+<p>Déjà un compte ? <a routerLink="/login">Connectez-vous</a></p>

@@ -1,0 +1,22 @@
+<h2>Connexion</h2>
+
+<form (submit)="onLogin()">
+  <div>
+    <label for="email">Email :</label><br />
+    <input type="email" id="email" [(ngModel)]="credentials.email" name="email" required/>
+  </div>
+
+  <br/>
+
+  <div>
+    <label for="password">Mot de passe :</label><br />
+    <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required/>
+  </div>
+
+  <br/>
+
+  <button type="submit">Se connecter</button>
+
+</form>
+
+<p>Pas encore de compte ? <a routerLink="/register">Inscrivez-vous</a></p>
