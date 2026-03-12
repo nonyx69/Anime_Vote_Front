@@ -16,24 +16,26 @@ export class RegisterComponent {
     password: '',
   };
 
+  showPassword = false;
+
+  passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{10,}$';
+
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
 
-  onRegister() {
-    console.log('Envoi des données :', this.user);
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
+  onRegister() {
     this.authService.register(this.user).subscribe({
-      next: (res: any) => {
-        console.log('Réponse du serveur :', res);
-        alert('Compte créé avec succès !');
+      next: () => {
+        alert('Compte créé !');
         this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.error("Erreur lors de l'inscription :", err);
-        alert(err.error?.message || 'Une erreur est survenue');
-      },
+      error: (err) => alert(err.error?.message || 'Erreur'),
     });
   }
 }
