@@ -1,10 +1,21 @@
-<header class="main-header">
-  <nav>
-    <div class="logo">Anime Vote</div>
-    <ul>
-      <li><a routerLink="/register">Inscription</a></li>
-      <li><a routerLink="/login">Connexion</a></li>
-    </ul>
+<header>
+  <nav class="navbar">
+    <div class="nav-brand" routerLink="/">
+      <img src="Logo_anime_vote.png" alt="Logo" width="50px" height="50px">
+      <div class="brand-text">
+        <h1>Saiko Rank</h1>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/home" routerLinkActive="active"><b>🏠 Accueil</b></a>
+
+      <a routerLink="/profile" routerLinkActive="active"><b>👤 Mon Compte</b></a>
+
+      <a routerLink="/admin" routerLinkActive="active"><b>📈 Admin</b></a>
+
+      <a routerLink="/admin" routerLinkActive="active" class="notification">🔔 <span class="badge">9+</span></a>
+    </div>
   </nav>
 </header>
 
