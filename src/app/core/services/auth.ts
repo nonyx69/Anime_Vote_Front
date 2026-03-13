@@ -15,4 +15,8 @@ export class AuthService {
   login(credentials: any) {
     return this.http.post(`${this.apiUrl}user/login`, credentials);
   }
+  logout() {
+    localStorage.removeItem('userPseudo');
+    localStorage.removeItem('auth_token');
+  }
 }
