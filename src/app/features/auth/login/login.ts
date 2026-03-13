@@ -8,6 +8,7 @@ import { AuthService } from '../../../core/services/auth';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   credentials = {
