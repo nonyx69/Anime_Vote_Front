@@ -15,10 +15,18 @@ export class LoginComponent {
     password: '',
   };
 
+  showPassword = false;
+
+  passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{10,}$';
+
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   onLogin() {
     console.log('Tentative de connexion avec :', this.credentials);

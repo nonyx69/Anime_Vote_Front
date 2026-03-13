@@ -1,21 +1,45 @@
 <h2>Connexion</h2>
 
-<form (submit)="onLogin()">
+<form #loginForm="ngForm" (submit)="onLogin()">
   <div>
     <label for="email">Email :</label><br />
-    <input type="email" id="email" [(ngModel)]="credentials.email" name="email" required/>
+    <input type="email" id="email" [(ngModel)]="credentials.email" name="email" #email="ngModel" required email />
+    @if (email.invalid && email.touched) {
+      <p style="color: red; font-size: 0.8em;">Email invalide.</p>
+    }
   </div>
 
   <br/>
 
   <div>
     <label for="password">Mot de passe :</label><br />
-    <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required/>
+    <div>
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        id="password"
+        [(ngModel)]="credentials.password"
+        name="password"
+        #pwd="ngModel"
+        required
+        [pattern]="passwordPattern"
+        placeholder="••••••••••"
+      />
+
+    </div>
+
+    @if (pwd.invalid && pwd.touched) {
+      <div style="color: red; font-size: 0.8em; margin-top: 5px;">
+        @if (pwd.errors?.['required']) { <p>Mot de passe requis.</p> }
+        @if (pwd.errors?.['pattern']) {
+          <p>Sécurité : 10 caractères min, 1 Maj, 1 Min, 1 Chiffre et 1 Spécial (&#64;$!%*?&)</p>
+        }
+      </div>
+    }
   </div>
 
   <br/>
 
-  <button type="submit">Se connecter</button>
+  <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
 
 </form>
 
