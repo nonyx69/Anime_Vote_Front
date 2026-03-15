@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-vote',
+  selector: 'app-profil',
   imports: [],
-  template: ` <p>vote works!</p> `,
+  template: ` <p>profil works!</p> `,
   styles: ``,
 })
-export class Vote {}
+export class Profil {}

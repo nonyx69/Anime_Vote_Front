@@ -1,0 +1,20 @@
+<div class="home-wrapper">
+  <div class="header-badge">
+    <span class="badge-content">
+      <span class="icon">✨</span>
+      Votez pour vos anime et manga préférés
+    </span>
+  </div>
+
+  <h1 class="title-gradient">Sondages Anime & Manga</h1>
+
+  <p class="subtitle">Participez aux sondages de la communauté et partagez vos opinions sur vos séries préférées !</p>
+
+  <nav class="filter-nav">
+    <div class="filter-container">
+      <button class="filter-btn" [class.active]="selectedTab === 'tous'" (click)="selectTab('tous')">Tous</button>
+      <button class="filter-btn" [class.active]="selectedTab === 'anime'" (click)="selectTab('anime')">Anime</button>
+      <button class="filter-btn" [class.active]="selectedTab === 'manga'" (click)="selectTab('manga')">Manga</button>
+    </div>
+  </nav>
+</div>
