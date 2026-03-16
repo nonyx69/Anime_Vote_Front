@@ -38,7 +38,7 @@ export class LoginComponent {
         if (response.token) {
           localStorage.setItem('auth_token', response.token);
         }
-        // this.router.navigate(['/']);
+        this.router.navigate(['/user']);
       },
       error: (err) => {
         console.error('Erreur de connexion', err);

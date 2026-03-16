@@ -25,17 +25,7 @@
   <div>
     <label for="password">Mot de passe :</label><br />
     <div>
-      <input
-        [type]="showPassword ? 'text' : 'password'"
-        id="password"
-        [(ngModel)]="user.password"
-        name="password"
-        #pwd="ngModel"
-        required
-        [pattern]="passwordPattern"
-        placeholder="••••••••••"
-      />
-
+      <input [type]="showPassword ? 'text' : 'password'" id="password" [(ngModel)]="user.password" name="password" #pwd="ngModel" required [pattern]="passwordPattern" placeholder="••••••••••" />
     </div>
 
     @if (pwd.invalid && pwd.touched) {
