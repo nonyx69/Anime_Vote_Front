@@ -1,0 +1,42 @@
+<div class="conteneur-dashboard">
+  <div class="header">
+    <div class="titres">
+      <h1 class="titre-principal">Tableau de Bord Admin</h1>
+      <p class="sous-titre">Gérez vos sondages et analysez les statistiques</p>
+    </div>
+    <button class="bouton-creer">
+      <span class="plus">+</span> Créer un Sondage
+    </button>
+  </div>
+
+  <div class="grille-stats">
+    <div class="carte-stats violette">
+      <div class="badge">Total</div>
+      <div class="valeur">0</div>
+      <div class="label">Sondages créés</div>
+    </div>
+
+    <div class="carte-stats rose">
+      <div class="badge">Total</div>
+      <div class="valeur">0</div>
+      <div class="label">Votes totaux</div>
+    </div>
+
+    <div class="carte-stats bleue">
+      <div class="badge">Total</div>
+      <div class="valeur">0</div>
+      <div class="label">Commentaires</div>
+    </div>
+
+    <div class="carte-stats verte">
+      <div class="badge">Moy</div>
+      <div class="valeur">0</div>
+      <div class="label">Votes par sondage</div>
+    </div>
+  </div>
+
+  <div class="barre-onglets">
+    <button class="filter-btn" [class.active]="selectedTab === 'Analytiques'" (click)="selectTab('Analytiques')">Analytiques</button>
+    <button class="filter-btn" [class.active]="selectedTab === 'Mes sondages'" (click)="selectTab('Mes sondages')">Mes sondages</button>
+  </div>
+</div>
