@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: 'admin.component.css',
 })
 export class AdminComponent {
-  selectedTab: 'Analytiques' | 'Mes sondages' | undefined;
+  selectedTab: 'Analytiques' | 'Mes sondages' = 'Analytiques';
 
   constructor() {}
 
@@ -15,7 +15,7 @@ export class AdminComponent {
    *
    * @param tab
    */
-  selectTab(tab: 'Analytiques' | 'Mes sondages' | undefined) {
+  selectTab(tab: 'Analytiques' | 'Mes sondages') {
     this.selectedTab = tab;
     console.log(`Filtre sélectionné : ${tab}`);
   }
