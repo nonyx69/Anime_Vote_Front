@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
 import { AuthService } from './core/services/auth';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +12,8 @@ import { AuthService } from './core/services/auth';
 })
 export class AppComponent {
   constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 }
