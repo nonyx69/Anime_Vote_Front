@@ -2,35 +2,29 @@
   <nav class="navbar">
     <div class="nav-brand" routerLink="/">
       <img src="Logo_anime_vote.png" alt="Logo" width="50px" height="50px">
-      <div class="brand-text">
-        <h1>Saiko Rank</h1>
-      </div>
+      <div class="brand-text"><h1>Saiko Rank</h1></div>
     </div>
 
     <div class="nav-links">
       <a routerLink="/" routerLinkActive="active"><b>🏠 Accueil</b></a>
 
-<!--        @if (authService.userPseudo$ | async; as pseudo) {-->
-<!--          <div class="user-group">-->
-<!--            <a routerLink="/profile" class="pseudo-link"><b>👤 {{ pseudo }}</b></a>-->
-<!--          </div>-->
+      @if (authService.user$ | async; as user) {
+        <a routerLink="/user" routerLinkActive="active"><b>👤 {{ user.pseudo }}</b></a>
 
-<!--          @if ((authService.userRole$ | async) === 'ROLE_Admin') {-->
-            <a routerLink="/admin" routerLinkActive="active"><b>📈 Admin</b></a>
-<!--          }-->
+        @if (user.roles && user.roles.includes('ROLE_ADMIN')) {
+          <a routerLink="/admin" routerLinkActive="active"><b>📈 Admin</b></a>
+        }
 
-<!--        } @else {-->
-          <a routerLink="/login" routerLinkActive="active"><b>👤 Mon Compte</b></a>
-<!--        }-->
+        <a (click)="logout()" style="cursor:pointer"><b>🚪 Déconnexion</b></a>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active"><b>👤 Mon Compte</b></a>
+      }
+
       <a routerLink="/notif" routerLinkActive="active" class="notification">🔔 <span class="badge">9+</span></a>
-      </div>
+    </div>
   </nav>
 </header>
 
 <main class="content">
   <router-outlet />
 </main>
-
-<footer class="main-footer">
-  <p>&copy; 2024 - Anime Vote - Tous droits réservés</p>
-</footer>

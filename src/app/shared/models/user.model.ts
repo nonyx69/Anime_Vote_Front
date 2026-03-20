@@ -5,7 +5,5 @@ export interface User {
   roles: string[];
   created_at: string;
   token?: string;
+  image_profil?: string;
 }
-
-
-//ng generate service core/services/anime
