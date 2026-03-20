@@ -4,7 +4,6 @@
     min-height: 100vh;
 }
 
-/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -52,10 +51,21 @@
     position: relative;
 }
 
-.violette { background-color: #8b5cf6; }
-.rose { background-color: #db2777; }
-.bleue { background-color: #2563eb; }
-.verte { background-color: #16a34a; }
+.violette {
+    background-color: #8b5cf6;
+}
+
+.rose {
+    background-color: #db2777;
+}
+
+.bleue {
+    background-color: #2563eb;
+}
+
+.verte {
+    background-color: #16a34a;
+}
 
 .badge {
     position: absolute;

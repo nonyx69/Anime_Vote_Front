@@ -5,7 +5,6 @@
     padding: 10px;
 }
 
-/* Bannière avec dégradé */
 .profile-header {
     background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
     border-radius: 20px;
@@ -16,7 +15,6 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Avatar circulaire */
 .avatar-container img {
     width: 120px;
     height: 120px;
@@ -41,7 +39,6 @@
     font-size: 1rem;
 }
 
-/* Statistiques */
 .stats {
     display: flex;
     align-items: center;
@@ -69,7 +66,6 @@
     margin: 0 25px;
 }
 
-/* Navigation basse */
 .profile-nav {
     display: flex;
     background-color: #e9ecef;
