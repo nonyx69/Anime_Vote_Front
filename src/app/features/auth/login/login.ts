@@ -8,16 +8,11 @@ import { AuthService } from '../../../core/services/auth';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  credentials = {
-    email: '',
-    password: '',
-  };
-
+  credentials = { email: '', password: '' };
   showPassword = false;
-
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{10,}$';
 
   constructor(
@@ -30,19 +25,14 @@ export class LoginComponent {
   }
 
   onLogin() {
-    console.log('Tentative de connexion avec :', this.credentials);
-
     this.authService.login(this.credentials).subscribe({
-      next: (response: any) => {
-        console.log('Connexion réussie !', response);
-        if (response.token) {
-          localStorage.setItem('auth_token', response.token);
+      next: (response) => {
+        if (response === 'ok') {
+          this.router.navigate(['/user']);
         }
-        this.router.navigate(['/user']);
       },
       error: (err) => {
-        console.error('Erreur de connexion', err);
-        alert(err.error?.message || 'Identifiants incorrects');
+        alert(err.error?.message || 'Erreur lors de la connexion');
       },
     });
   }

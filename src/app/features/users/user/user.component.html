@@ -1,31 +1,31 @@
-<a routerLink="/" routerLinkActive="active"><b>Log Out</b></a>
+@if (authService.user$ | async; as user) {
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="avatar-container">
+        <img [src]="currentUser.image_profil" alt="Profil" class="avatar-img" (error)="updateUrl($event)">
+      </div>
 
-<div class="profile-container">
-  <div class="profile-header">
-    <div class="avatar-container">
-      <img [src]="currentUser.avatarUrl" alt="Avatar">
-    </div>
+      <div class="profile-info">
+        <h1>{{ $any(user).pseudo }}</h1>
+        <p class="join-date">Membre depuis le {{ $any(user).created_at | date:'dd/MM/yyyy' }}</p>
 
-    <div class="profile-info">
-      <h1>{{ currentUser.username }}</h1>
-      <p class="join-date">Membre depuis le {{ currentUser.joinDate }}</p>
-
-      <div class="stats">
-        <div class="stat-item">
-          <span class="stat-value">{{ currentUser.votes }}</span>
-          <span class="stat-label">Votes</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value">{{ currentUser.comments }}</span>
-          <span class="stat-label">Commentaires</span>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Votes</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Commentaires</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="profile-nav">
-    <button class="filter-btn" [class.active]="selectedTab === 'Notifications'" (click)="selectTab('Notifications')">Notifications</button>
-    <button class="filter-btn" [class.active]="selectedTab === 'Mes Votes'" (click)="selectTab('Mes Votes')">Mes Votes</button>
+    <div class="profile-nav">
+      <button class="filter-btn" [class.active]="selectedTab === 'Notifications'" (click)="selectTab('Notifications')">Notifications</button>
+      <button class="filter-btn" [class.active]="selectedTab === 'Mes Votes'" (click)="selectTab('Mes Votes')">Mes Votes</button>
+    </div>
   </div>
-</div>
+}

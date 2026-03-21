@@ -8,7 +8,7 @@ import { AuthService } from '../../../core/services/auth';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   user = {
@@ -32,11 +32,14 @@ export class RegisterComponent {
 
   onRegister() {
     this.authService.register(this.user).subscribe({
-      next: () => {
-        alert('Compte créé !');
+      next: (res: any) => {
+        alert('Compte créé avec succès !');
         this.router.navigate(['/login']);
       },
-      error: (err) => alert(err.error?.message || 'Erreur'),
+      error: (err) => {
+        console.error(err);
+        alert(err.error?.message || 'Erreur lors de l’inscription');
+      },
     });
   }
 }
