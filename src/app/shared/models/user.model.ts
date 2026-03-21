@@ -1,3 +1,5 @@
+import { Profil } from './profil.model';
+
 export interface User {
   id: number;
   email: string;
@@ -5,5 +7,5 @@ export interface User {
   roles: string[];
   created_at: string;
   token?: string;
-  image_profil?: string;
+  profil?: Profil;
 }
