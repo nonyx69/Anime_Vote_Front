@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from '../../../core/services/auth';
-import { AsyncPipe, DatePipe } from '@angular/common';
-
+import { AuthService } from '../../../core/services/auth';
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { User } from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [AsyncPipe, DatePipe],
+  imports: [AsyncPipe, DatePipe, CommonModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
 export class UserComponent implements OnInit {
-  currentUser: any = null;
+  currentUser: User | null = null;
   selectedTab: 'Notifications' | 'Mes Votes' = 'Notifications';
 
   constructor(public authService: AuthService) {}

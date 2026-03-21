@@ -2,7 +2,7 @@
   <div class="profile-container">
     <div class="profile-header">
       <div class="avatar-container">
-        <img [src]="currentUser.image_profil" alt="Profil" class="avatar-img" (error)="updateUrl($event)">
+        <img [src]="currentUser?.profil?.image_profil" alt="Profil" class="avatar-img" (error)="updateUrl($event)">
       </div>
 
       <div class="profile-info">

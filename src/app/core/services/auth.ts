@@ -1,5 +1,5 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common'; // Import indispensable
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -42,8 +42,8 @@ export class AuthService {
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}user/new`, userData);
-    this.router.navigate(['/login']);
+    return this.http.post<any>(`${this.apiUrl}user/sign`, userData);
+      this.router.navigate(['/login']);
   }
 
   login(credentials: any): Observable<any> {
