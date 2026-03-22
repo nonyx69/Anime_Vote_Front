@@ -5,7 +5,7 @@ export interface User {
   email: string;
   pseudo: string;
   roles: string[];
-  created_at: string;
+  createdAt: string;
   token?: string;
   profil?: Profil;
 }
