@@ -4,14 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Router, RouterLink } from '@angular/router';
-
-export interface User {
-  id: number;
-  email: string;
-  pseudo: string;
-  roles: string[];
-  token?: string;
-}
+import { User } from '../../shared/models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

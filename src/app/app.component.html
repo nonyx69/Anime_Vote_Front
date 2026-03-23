@@ -9,13 +9,15 @@
       <a routerLink="/" routerLinkActive="active"><b>🏠 Accueil</b></a>
 
       @if (authService.user$ | async; as user) {
-        <a routerLink="/user" routerLinkActive="active"><b>👤 {{ user.pseudo }}</b></a>
 
         @if (user.roles && user.roles.includes('ROLE_ADMIN')) {
           <a routerLink="/admin" routerLinkActive="active"><b>📈 Admin</b></a>
+        } @else {
+          <a routerLink="/user" routerLinkActive="active"><b>👤 {{ user.pseudo }}</b></a>
         }
 
         <a (click)="logout()" style="cursor:pointer"><b>🚪 Déconnexion</b></a>
+
       } @else {
         <a routerLink="/login" routerLinkActive="active"><b>👤 Mon Compte</b></a>
       }

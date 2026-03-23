@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth';
+import { User } from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{10,}$';
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
   ) {}
 
@@ -26,10 +27,17 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.login(this.credentials).subscribe({
-      next: (response) => {
-        if (response === 'ok') {
-          this.router.navigate(['/user']);
-        }
+      next: () => {
+        this.authService.user$.subscribe((user) => {
+          if (user) {
+            // VERIFICATION DES ROLES
+            if (user.roles && user.roles.includes('ROLE_ADMIN')) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/user']);
+            }
+          }
+        });
       },
       error: (err) => {
         alert(err.error?.message || 'Erreur lors de la connexion');
