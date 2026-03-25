@@ -6,7 +6,11 @@
       </div>
 
       <div class="profile-info">
-        <h1>{{ $any(user).pseudo }}</h1>
+        <div class="header-row">
+          <h1>{{ $any(user).pseudo }}</h1>
+          <button class="edit-btn-gear" (click)="openEditModal()">⚙️ Modifier</button>
+        </div>
+
         <p class="join-date">Membre depuis le {{ currentUser?.createdAt | date:'dd/MM/yyyy' }}</p>
         <p>Bio : {{ currentUser?.profil?.bio }}</p>
 
@@ -23,6 +27,34 @@
         </div>
       </div>
     </div>
+
+    @if (isEditModalOpen) {
+      <div class="modal-overlay">
+        <div class="edit-panel" (click)="$event.stopPropagation()">
+          <h2>Modifier le profil</h2>
+
+          <div class="input-group">
+            <label>Bio</label>
+            <input type="text" [(ngModel)]="tempBio" placeholder="Parle-nous de toi...">
+          </div>
+
+          <div class="input-group">
+            <label>Photo de profil (URL)</label>
+            <input type="text" [(ngModel)]="tempImage" placeholder="Lien vers l'image">
+          </div>
+
+          <div class="input-group">
+            <label>Ou importer un fichier</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-cancel" (click)="isEditModalOpen = false">Annuler</button>
+            <button class="btn-save" (click)="saveProfile()">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    }
 
     <div class="profile-nav">
       <button class="filter-btn" [class.active]="selectedTab === 'Notifications'" (click)="selectTab('Notifications')">Notifications</button>
