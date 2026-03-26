@@ -3,6 +3,7 @@ import { AuthService } from '../../../core/services/auth';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -44,29 +45,49 @@ export class UserComponent implements OnInit {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     const baseUrl = 'http://localhost:8000';
 
-    this.http.post(`${baseUrl}/user/bio`, { bio: this.tempBio }, { headers }).subscribe(() => {
-      this.updateLocalData('bio', this.tempBio);
+    const bioRequest = this.http.post(`${baseUrl}/user/bio`, { bio: this.tempBio }, { headers });
+    const photoRequest = this.http.post(
+      `${baseUrl}/user/photo`,
+      { image_profil: this.tempImage },
+      { headers },
+    );
+
+    forkJoin([bioRequest, photoRequest]).subscribe({
+      next: () => {
+        const timestampedImage = this.tempImage.startsWith('data:')
+          ? this.tempImage
+          : `${this.tempImage}?t=${Date.now()}`;
+
+        this.updateLocalData('bio', this.tempBio);
+        this.updateLocalData('image_profil', timestampedImage);
+
+        this.authService.updateUser({ ...this.currentUser });
+
+        this.isEditModalOpen = false;
+        console.log('Profil mis à jour et synchronisé !');
+      },
+      error: (err) => {
+        console.error('Erreur lors de la mise à jour du profil', err);
+      },
     });
-
-    this.http
-      .post(`${baseUrl}/user/photo`, { image_profil: this.tempImage }, { headers })
-      .subscribe(() => {
-        this.updateLocalData('image_profil', this.tempImage);
-      });
-
-    this.isEditModalOpen = false;
   }
 
   private updateLocalData(key: string, value: string) {
-    if (this.currentUser?.result?.profil) this.currentUser.result.profil[key] = value;
-    if (this.currentUser?.profil) this.currentUser.profil[key] = value;
+    if (this.currentUser?.result?.profil) {
+      this.currentUser.result.profil[key] = value;
+    }
+    if (this.currentUser?.profil) {
+      this.currentUser.profil[key] = value;
+    }
   }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => (this.tempImage = e.target.result);
+      reader.onload = (e: any) => {
+        this.tempImage = e.target.result;
+      };
       reader.readAsDataURL(file);
     }
   }
@@ -76,7 +97,6 @@ export class UserComponent implements OnInit {
   }
 
   updateUrl(event: any) {
-    console.log("Chargement de la PP par défault...");
-    event.target.src = 'PP_zero_two.jpg';
+    event.target.src = 'assets/PP_zero_two.jpg';
   }
 }
