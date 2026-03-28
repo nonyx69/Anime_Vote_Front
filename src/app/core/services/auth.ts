@@ -26,13 +26,11 @@ export class AuthService {
     }
   }
 
-  // --- NOUVELLE MÉTHODE POUR LA MISE À JOUR EN DIRECT ---
   updateUser(updatedUser: any): void {
     if (isPlatformBrowser(this.platformId)) {
-      // 1. On met à jour le localStorage pour que les changements persistent au refresh
+      // on met à jour le localstorage pour que les changements reste apres refresh
       localStorage.setItem('auth_user', JSON.stringify(updatedUser));
     }
-    // 2. On pousse la nouvelle valeur dans le Subject pour mettre à jour les composants
     this.userSubject.next(updatedUser);
   }
 
@@ -56,7 +54,6 @@ export class AuthService {
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}user/login`, credentials).pipe(
       tap((response) => {
-        // Ajustement selon ta structure : on stocke tout le "result" qui contient le user et le token
         if (response.status === 'ok' && isPlatformBrowser(this.platformId)) {
           localStorage.setItem('auth_token', response.result.token);
           localStorage.setItem('auth_user', JSON.stringify(response.result));

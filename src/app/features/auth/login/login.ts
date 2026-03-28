@@ -43,5 +43,6 @@ export class LoginComponent {
         alert(err.error?.message || 'Erreur lors de la connexion');
       },
     });
+    alert('Mot de passe ou identifiant incorrect');
   }
 }
