@@ -12,11 +12,11 @@
         </div>
 
         <p class="join-date">Membre depuis le {{ currentUser?.createdAt | date:'dd/MM/yyyy' }}</p>
-        <p>Bio : {{ currentUser?.profil?.bio }}</p>
+        <p>Bio : {{ currentUser?.profil?.bio || 'Aucune bio renseignée' }}</p>
 
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-value">0</span>
+            <span class="stat-value">{{ userVotes.length }}</span>
             <span class="stat-label">Votes</span>
           </div>
           <div class="stat-divider"></div>
@@ -29,25 +29,21 @@
     </div>
 
     @if (isEditModalOpen) {
-      <div class="modal-overlay">
+      <div class="modal-overlay" (click)="isEditModalOpen = false">
         <div class="edit-panel" (click)="$event.stopPropagation()">
           <h2>Modifier le profil</h2>
-
           <div class="input-group">
             <label>Bio</label>
             <input type="text" [(ngModel)]="tempBio" placeholder="Parle-nous de toi...">
           </div>
-
           <div class="input-group">
             <label>Photo de profil (URL)</label>
             <input type="text" [(ngModel)]="tempImage" placeholder="Lien vers l'image">
           </div>
-
           <div class="input-group">
             <label>Ou importer un fichier</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/*">
           </div>
-
           <div class="modal-actions">
             <button class="btn-cancel" (click)="isEditModalOpen = false">Annuler</button>
             <button class="btn-save" (click)="saveProfile()">Enregistrer</button>
@@ -59,6 +55,32 @@
     <div class="profile-nav">
       <button class="filter-btn" [class.active]="selectedTab === 'Notifications'" (click)="selectTab('Notifications')">Notifications</button>
       <button class="filter-btn" [class.active]="selectedTab === 'Mes Votes'" (click)="selectTab('Mes Votes')">Mes Votes</button>
+    </div>
+
+    <div class="tab-results">
+      @if (selectedTab === 'Notifications') {
+        <div class="empty-state">
+          <p>Aucune notif pour le moment.</p>
+        </div>
+      }
+
+      @if (selectedTab === 'Mes Votes') {
+        <div class="votes-container">
+          @if (isLoadingVotes) {
+            <p>Chargement...</p>
+          } @else {
+            <div class="vote-list">
+              @for (vote of userVotes; track vote.id) {
+                <div class="vote-card">
+                  <span class="badge">{{ vote.sondage_name }}</span>
+                  <h3>{{ vote.question_label }}</h3>
+                  <p>Votre vote : <strong>{{ vote.choix_label }}</strong></p>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
     </div>
   </div>
 }
