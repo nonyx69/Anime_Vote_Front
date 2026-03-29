@@ -92,15 +92,14 @@ export class UserComponent implements OnInit {
 
     forkJoin([bioRequest, photoRequest]).subscribe({
       next: () => {
-        const timestampedImage = this.tempImage.startsWith('data:')
-          ? this.tempImage
-          : `${this.tempImage}?t=${Date.now()}`;
+        const timestampedImage = this.tempImage.startsWith('data:') ? this.tempImage : `${this.tempImage}?t=${Date.now()}`;
 
         this.updateLocalData('bio', this.tempBio);
         this.updateLocalData('image_profil', timestampedImage);
 
         this.authService.updateUser({ ...this.currentUser });
         this.isEditModalOpen = false;
+        console.log('Profil mis à jour et synchroniser !');
       },
       error: (err) => console.error('Erreur mise à jour profil', err),
     });
@@ -121,6 +120,6 @@ export class UserComponent implements OnInit {
   }
 
   updateUrl(event: any) {
-    event.target.src = 'assets/PP_zero_two.jpg';
+    event.target.src = 'images/PP/PP_zero_two.jpg';
   }
 }

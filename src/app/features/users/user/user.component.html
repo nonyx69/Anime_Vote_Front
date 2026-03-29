@@ -29,8 +29,8 @@
     </div>
 
     @if (isEditModalOpen) {
-      <div class="modal-overlay" (click)="isEditModalOpen = false">
-        <div class="edit-panel" (click)="$event.stopPropagation()">
+      <div class="modal-overlay">
+        <div class="edit-panel">
           <h2>Modifier le profil</h2>
           <div class="input-group">
             <label>Bio</label>
